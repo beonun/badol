@@ -26,10 +26,9 @@ import java.util.*;
 public class SgfWriter {
 
     public static void write(List<BdkSection> sections, File file) throws IOException {
-        String sgf = serialize(sections);
-        try (FileOutputStream fos = new FileOutputStream(file);
-             OutputStreamWriter writer = new OutputStreamWriter(fos, StandardCharsets.UTF_8)) {
-            writer.write(sgf);
+        byte[] data = serialize(sections);
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(data);
         }
     }
 
