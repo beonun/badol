@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    태블릿 값 (sw >= 600dp: 7인치 이상 태블릿)
+    - 바둑판 여백을 넉넉하게 유지
+    - 버튼/텍스트를 크게 표시
+-->
+<resources>
+    <!-- 바둑판 상하 여백 -->
+    <dimen name="board_margin_top">40dp</dimen>
+    <dimen name="board_margin_bottom">40dp</dimen>
+
+    <!-- 기보 목록 최소 높이 -->
+    <dimen name="section_list_min_height">120dp</dimen>
+
+    <!-- 버튼 높이 -->
+    <dimen name="btn_height">48dp</dimen>
+
+    <!-- 버튼 텍스트 크기 -->
+    <dimen name="btn_text_size">15sp</dimen>
+
+    <!-- 정보 바 텍스트 크기 -->
+    <dimen name="info_text_size">14sp</dimen>
+</resources>

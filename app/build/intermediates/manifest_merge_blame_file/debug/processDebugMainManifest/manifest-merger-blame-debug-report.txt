@@ -1,0 +1,179 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.bdk.studio"
+4    android:versionCode="1"
+5    android:versionName="4.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="35" />
+10
+11    <uses-permission
+11-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:5:5-6:38
+12        android:name="android.permission.READ_EXTERNAL_STORAGE"
+12-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:5:22-77
+13        android:maxSdkVersion="32" />
+13-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:6:9-35
+14    <uses-permission
+14-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:7:5-8:38
+15        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+15-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:7:22-78
+16        android:maxSdkVersion="29" />
+16-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:8:9-35
+17    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+17-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:9:5-10:40
+17-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:9:22-79
+18
+19    <permission
+19-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:22:5-24:47
+20        android:name="com.bdk.studio.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+20-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:23:9-81
+21        android:protectionLevel="signature" />
+21-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:24:9-44
+22
+23    <uses-permission android:name="com.bdk.studio.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+23-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:26:5-97
+23-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:26:22-94
+24
+25    <application
+25-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:12:5-48:19
+26        android:allowBackup="true"
+26-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:13:9-35
+27        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+27-->[androidx.core:core:1.13.0] C:\Users\jauro\.gradle\caches\transforms-3\aa825082121e47b3862aff9153885095\transformed\core-1.13.0\AndroidManifest.xml:28:18-86
+28        android:debuggable="true"
+29        android:extractNativeLibs="false"
+30        android:icon="@mipmap/ic_launcher"
+30-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:14:9-43
+31        android:label="@string/app_name"
+31-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:15:9-41
+32        android:requestLegacyExternalStorage="true"
+32-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:19:9-52
+33        android:roundIcon="@mipmap/ic_launcher_round"
+33-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:16:9-54
+34        android:supportsRtl="true"
+34-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:17:9-35
+35        android:theme="@style/Theme.Bdk20" >
+35-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:18:9-43
+36        <activity
+36-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:21:9-34:20
+37            android:name="com.bdk.studio.MainActivity"
+37-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:22:13-41
+38            android:exported="true"
+38-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:23:13-36
+39            android:windowSoftInputMode="adjustResize" >
+39-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:24:13-55
+40            <intent-filter>
+40-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:25:13-28:29
+41                <action android:name="android.intent.action.MAIN" />
+41-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:26:17-69
+41-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:26:25-66
+42
+43                <category android:name="android.intent.category.LAUNCHER" />
+43-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:27:17-77
+43-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:27:27-74
+44            </intent-filter>
+45            <intent-filter>
+45-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:29:13-33:29
+46                <action android:name="android.intent.action.VIEW" />
+46-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:30:17-69
+46-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:30:25-66
+47
+48                <category android:name="android.intent.category.DEFAULT" />
+48-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:31:17-76
+48-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:31:27-73
+49
+50                <data android:mimeType="*/*" />
+50-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:32:17-48
+50-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:32:23-45
+51            </intent-filter>
+52        </activity>
+53        <activity
+53-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:36:9-40:58
+54            android:name="com.bdk.studio.ViewerActivity"
+54-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:37:13-43
+55            android:configChanges="orientation|screenSize|screenLayout"
+55-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:39:13-72
+56            android:exported="false"
+56-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:38:13-37
+57            android:windowSoftInputMode="adjustResize" />
+57-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:40:13-55
+58        <activity
+58-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:42:9-46:58
+59            android:name="com.bdk.studio.EditorActivity"
+59-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:43:13-43
+60            android:configChanges="orientation|screenSize|screenLayout"
+60-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:45:13-72
+61            android:exported="false"
+61-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:44:13-37
+62            android:windowSoftInputMode="adjustResize" />
+62-->C:\Bdk2.0\app\src\main\AndroidManifest.xml:46:13-55
+63
+64        <provider
+64-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:24:9-32:20
+65            android:name="androidx.startup.InitializationProvider"
+65-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:25:13-67
+66            android:authorities="com.bdk.studio.androidx-startup"
+66-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:26:13-68
+67            android:exported="false" >
+67-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:27:13-37
+68            <meta-data
+68-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+69                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+69-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:30:17-75
+70                android:value="androidx.startup" />
+70-->[androidx.emoji2:emoji2:1.3.0] C:\Users\jauro\.gradle\caches\transforms-3\e1117e0ac37c7b205c9192a855f2883a\transformed\jetified-emoji2-1.3.0\AndroidManifest.xml:31:17-49
+71            <meta-data
+71-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\jauro\.gradle\caches\transforms-3\9919d4682518a73792268e29432d7150\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:29:13-31:52
+72                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+72-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\jauro\.gradle\caches\transforms-3\9919d4682518a73792268e29432d7150\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:30:17-78
+73                android:value="androidx.startup" />
+73-->[androidx.lifecycle:lifecycle-process:2.6.2] C:\Users\jauro\.gradle\caches\transforms-3\9919d4682518a73792268e29432d7150\transformed\jetified-lifecycle-process-2.6.2\AndroidManifest.xml:31:17-49
+74            <meta-data
+74-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:29:13-31:52
+75                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+75-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:30:17-85
+76                android:value="androidx.startup" />
+76-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:31:17-49
+77        </provider>
+78
+79        <receiver
+79-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:34:9-52:20
+80            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+80-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:35:13-76
+81            android:directBootAware="false"
+81-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:36:13-44
+82            android:enabled="true"
+82-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:37:13-35
+83            android:exported="true"
+83-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:38:13-36
+84            android:permission="android.permission.DUMP" >
+84-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:39:13-57
+85            <intent-filter>
+85-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:40:13-42:29
+86                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+86-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:41:17-91
+86-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:41:25-88
+87            </intent-filter>
+88            <intent-filter>
+88-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:43:13-45:29
+89                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+89-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:44:17-85
+89-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:44:25-82
+90            </intent-filter>
+91            <intent-filter>
+91-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:46:13-48:29
+92                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:47:17-88
+92-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:47:25-85
+93            </intent-filter>
+94            <intent-filter>
+94-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:49:13-51:29
+95                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:50:17-95
+95-->[androidx.profileinstaller:profileinstaller:1.4.0] C:\Users\jauro\.gradle\caches\transforms-3\b65cf085b11a27d606973f87dba1e932\transformed\jetified-profileinstaller-1.4.0\AndroidManifest.xml:50:25-92
+96            </intent-filter>
+97        </receiver>
+98    </application>
+99
+100</manifest>

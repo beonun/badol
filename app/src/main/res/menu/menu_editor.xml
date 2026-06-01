@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_save"
+        android:title="저장"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_save_as"
+        android:title="다른 이름으로 저장"
+        android:orderInCategory="200"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_select_section"
+        android:title="기보 선택"
+        android:orderInCategory="300"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_rename_section"
+        android:title="기보 이름 변경"
+        android:orderInCategory="400"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_clear_section"
+        android:title="현재 기보 초기화"
+        android:orderInCategory="500"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_coords"
+        android:title="좌표 표시"
+        android:orderInCategory="600"
+        android:checkable="true"
+        android:checked="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sound"
+        android:title="착수음"
+        android:orderInCategory="700"
+        android:checkable="true"
+        android:checked="true"
+        app:showAsAction="never" />
+
+</menu>

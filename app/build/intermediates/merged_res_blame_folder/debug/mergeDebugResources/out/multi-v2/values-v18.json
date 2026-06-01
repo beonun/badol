@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.bdk.studio.app-mergeDebugResources-2:/values-v18/values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\jauro\\.gradle\\caches\\transforms-3\\b1c0accac21864120dafae91c60310cd\\transformed\\appcompat-1.7.0\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        }
+    ]
+}

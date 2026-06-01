@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/board_color">
+
+    <!-- 툴바 (뷰어 = 딕 그린): fitsSystemWindows=true 로 상태표시줄 영역까지 확장 -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/primary"
+            app:titleTextColor="#FFFFFF"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 가로 모드: 바둑판(왼쪽) + 컨트롤(오른쪽) -->
+    <LinearLayout
+        android:id="@+id/contentRow"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!-- 바둑판 -->
+        <com.badol.studio.BoardView
+            android:id="@+id/boardView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <!-- 오른쪽 컨트롤 패널 -->
+        <LinearLayout
+            android:id="@+id/bottomPanel"
+            android:layout_width="260dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#FFFFFF">
+
+            <!-- ── 정보 표시 바: 수 정보 ── -->
+            <TextView
+                android:id="@+id/tvMoveInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                android:background="@color/bg_action_bar"
+                android:text="기보를 불러오는 중..." />
+
+            <!-- ── 액션 버튼 영역: 놓아보기 + 흑→백 전환 ── -->
+            <LinearLayout
+                android:id="@+id/layoutTryModePanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingStart="6dp"
+                android:paddingEnd="6dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="#FFFFFF"
+                android:elevation="1dp">
+
+                <!-- 놓아보기 토글 -->
+                <Button
+                    android:id="@+id/btnStartTryMove"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="3dp"
+                    android:text="놓아보기"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/btn_try_move"
+                    android:elevation="4dp"
+                    android:visibility="gone"
+                    style="?attr/materialButtonStyle" />
+
+                <!-- 흑/백 전환 -->
+                <Button
+                    android:id="@+id/btnToggleColor"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="3dp"
+                    android:text="흑→백"
+                    android:textSize="14sp"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/btn_neutral"
+                    android:elevation="4dp"
+                    android:visibility="gone"
+                    style="?attr/materialButtonStyle" />
+
+            </LinearLayout>
+
+            <!-- ── 정보 표시 바: 놓아보기 상태 ── -->
+            <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:background="@color/primary"
+                android:visibility="gone" />
+
+            <!-- ── 시크바 ── -->
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="2dp" />
+
+            <!-- ── 재생 컨트롤 버튼 행 ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="2dp"
+                android:background="@color/bg_nav_bar"
+                android:elevation="1dp">
+
+                <ImageButton
+                    android:id="@+id/btnFirst"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@android:drawable/ic_media_previous"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="처음" />
+
+                <ImageButton
+                    android:id="@+id/btnPrev"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@android:drawable/ic_media_rew"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="이전" />
+
+                <ImageButton
+                    android:id="@+id/btnPlay"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@android:drawable/ic_media_play"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="재생" />
+
+                <ImageButton
+                    android:id="@+id/btnNext"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@android:drawable/ic_media_ff"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="다음" />
+
+                <ImageButton
+                    android:id="@+id/btnLast"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:src="@android:drawable/ic_media_next"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="끝" />
+
+            </LinearLayout>
+
+            <!-- ── 주석 표시 바 ── -->
+            <TextView
+                android:id="@+id/tvComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:textSize="12sp"
+                android:textColor="#333333"
+                android:background="@color/bg_info_bar"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:visibility="gone" />
+
+            <!-- 구분선 -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/divider" />
+
+            <!-- ── 기보 목록 헤더 ── -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="26dp"
+                android:orientation="horizontal"
+                android:background="@color/bg_section_header"
+                android:paddingStart="0dp"
+                android:paddingEnd="10dp"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="4dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/primary"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="기보 목록"
+                    android:textSize="11sp"
+                    android:textColor="@color/primary"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- 기보 목록 ListView -->
+            <ListView
+                android:id="@+id/lvSectionList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:divider="@color/divider"
+                android:dividerHeight="1dp"
+                android:scrollbars="vertical" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

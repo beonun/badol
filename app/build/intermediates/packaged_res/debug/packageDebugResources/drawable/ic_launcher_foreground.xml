@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 바둑판 배경 (황갈색) -->
+    <path
+        android:fillColor="#DEB887"
+        android:pathData="M20,20 L88,20 L88,88 L20,88 Z" />
+
+    <!-- 격자선 가로 -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M30,30 L78,30 M30,44 L78,44 M30,58 L78,58 M30,72 L78,72" />
+
+    <!-- 격자선 세로 -->
+    <path
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:fillColor="#00000000"
+        android:pathData="M30,30 L30,72 M44,30 L44,72 M58,30 L58,72 M72,30 L72,72" />
+
+    <!-- 흑돌 (cx=44, cy=44, r=7) → path로 변환 -->
+    <path
+        android:fillColor="#000000"
+        android:pathData="M44,37 A7,7 0 1,1 43.999,37 Z" />
+
+    <!-- 백돌 테두리 (cx=58, cy=58, r=7) → path로 변환 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#000000"
+        android:strokeWidth="1.5"
+        android:pathData="M58,51 A7,7 0 1,1 57.999,51 Z" />
+
+</vector>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    기본값 (스마트폰, sw < 600dp)
+    - 바둑판 상하 여백을 줄여 하단 컨트롤 영역 확보
+    - 바둑판이 화면의 55%를 차지하고 나머지 45%는 컨트롤/목록에 할당
+-->
+<resources>
+    <!-- 바둑판 상하 여백 -->
+    <dimen name="board_margin_top">16dp</dimen>
+    <dimen name="board_margin_bottom">16dp</dimen>
+
+    <!-- 바둑판 영역 layout_weight (바둑판 : 하단패널 = 55 : 45) -->
+    <!-- 바둑판 FrameLayout에 적용: layout_height="0dp", layout_weight="board_weight" -->
+    <!-- 주의: weight는 float이므로 dimen 대신 integer로 관리 -->
+
+    <!-- 기보 목록 최소 높이 -->
+    <dimen name="section_list_min_height">80dp</dimen>
+
+    <!-- 버튼 높이 -->
+    <dimen name="btn_height">40dp</dimen>
+
+    <!-- 버튼 텍스트 크기 -->
+    <dimen name="btn_text_size">13sp</dimen>
+
+    <!-- 정보 바 텍스트 크기 -->
+    <dimen name="info_text_size">12sp</dimen>
+</resources>

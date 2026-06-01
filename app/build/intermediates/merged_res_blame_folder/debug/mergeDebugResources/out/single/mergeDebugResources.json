@@ -1,0 +1,106 @@
+[
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-sw600dp_activity_viewer.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-sw600dp/activity_viewer.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/menu_menu_viewer.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/menu/menu_viewer.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout_bottom_sheet_sections.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout/bottom_sheet_sections.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xxhdpi_ic_launcher_round.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout_activity_main.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout_activity_editor.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout/activity_editor.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout_activity_viewer.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout/activity_viewer.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-land_activity_viewer.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-land/activity_viewer.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-hdpi_ic_launcher_round.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-hdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/animator_button_state_list_animator.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/animator/button_state_list_animator.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-sw600dp-land_activity_viewer.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-sw600dp-land/activity_viewer.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/menu_menu_editor.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/menu/menu_editor.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-land_activity_editor.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-land/activity_editor.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-sw600dp-land_activity_editor.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-sw600dp-land/activity_editor.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-mdpi_ic_launcher_round.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-mdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/mipmap-xxxhdpi_ic_launcher_round.png.flat",
+        "source": "com.bdk.studio.app-main-6:/mipmap-xxxhdpi/ic_launcher_round.png"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/layout-sw600dp_activity_editor.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/layout-sw600dp/activity_editor.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/drawable_ic_launcher_background.xml.flat",
+        "source": "com.bdk.studio.app-main-6:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "com.bdk.studio.app-debug-4:/raw_stone_click.wav.flat",
+        "source": "com.bdk.studio.app-main-6:/raw/stone_click.wav"
+    }
+]

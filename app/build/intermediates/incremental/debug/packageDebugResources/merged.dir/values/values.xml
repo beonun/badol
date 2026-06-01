@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#43A047</color>
+    <color name="bg_action_bar">#F1F8E9</color>
+    <color name="bg_app">#F1F8E9</color>
+    <color name="bg_info_bar">#E8F5E9</color>
+    <color name="bg_nav_bar">#F9FBE7</color>
+    <color name="bg_section_header">#C8E6C9</color>
+    <color name="black">#000000</color>
+    <color name="board_color">#F4D583</color>
+    <color name="btn_add">#388E3C</color>
+    <color name="btn_del">#B71C1C</color>
+    <color name="btn_neutral">#546E7A</color>
+    <color name="btn_new">#43A047</color>
+    <color name="btn_open">#388E3C</color>
+    <color name="btn_scan">#2E7D32</color>
+    <color name="btn_toggle_mode">#2E7D32</color>
+    <color name="btn_try_move">#388E3C</color>
+    <color name="btn_undo">#C62828</color>
+    <color name="divider">#C8E6C9</color>
+    <color name="primary">#1B5E20</color>
+    <color name="primary_dark">#2E7D32</color>
+    <color name="primary_light">#4CAF50</color>
+    <color name="text_hint">#888888</color>
+    <color name="text_primary">#1B5E20</color>
+    <color name="text_secondary">#555555</color>
+    <color name="white">#FFFFFF</color>
+    <dimen name="board_margin_bottom">16dp</dimen>
+    <dimen name="board_margin_top">16dp</dimen>
+    <dimen name="btn_height">40dp</dimen>
+    <dimen name="btn_text_size">13sp</dimen>
+    <dimen name="info_text_size">12sp</dimen>
+    <dimen name="section_list_min_height">80dp</dimen>
+    <string name="action_about">정보</string>
+    <string name="action_delete_move">수 삭제</string>
+    <string name="action_edit">편집 모드</string>
+    <string name="action_game_info">게임 정보</string>
+    <string name="action_open">파일 열기</string>
+    <string name="action_refresh">새로고침</string>
+    <string name="action_save">저장</string>
+    <string name="action_save_as">다른 이름으로 저장</string>
+    <string name="action_sections">섹션 선택</string>
+    <string name="action_show_coords">좌표 표시</string>
+    <string name="action_show_numbers">착수 번호 표시</string>
+    <string name="action_speed">재생 속도</string>
+    <string name="app_name">Bdk 2.0</string>
+    <string name="loading">로딩 중...</string>
+    <string name="move_first">처음</string>
+    <string name="move_last">끝</string>
+    <string name="move_next">다음</string>
+    <string name="move_prev">이전</string>
+    <string name="no_files">BDK 파일이 없습니다</string>
+    <string name="pause">일시정지</string>
+    <string name="play">재생</string>
+    <style name="BdkButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="elevation">4dp</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
+        <item name="cornerRadius">6dp</item>
+    </style>
+    <style name="BdkButton.Small" parent="BdkButton">
+        <item name="android:textSize">13sp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+    </style>
+    <style name="BdkOverflowMenu" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+    <style name="Theme.Bdk20" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#1B5E20</item>
+        <item name="colorPrimaryVariant">#1B5E20</item>
+        <item name="colorPrimaryDark">#1B5E20</item>
+        <item name="colorAccent">#43A047</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="android:windowBackground">@color/bg_app</item>
+        
+        <item name="android:statusBarColor">#1B5E20</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <item name="actionOverflowMenuStyle">@style/BdkOverflowMenu</item>
+        
+        <item name="materialButtonStyle">@style/BdkButton</item>
+    </style>
+</resources>

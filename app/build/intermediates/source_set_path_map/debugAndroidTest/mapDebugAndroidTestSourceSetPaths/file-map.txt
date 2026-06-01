@@ -1,0 +1,5 @@
+com.bdk.studio.test.app-androidTest-0 C:\Bdk2.0\app\build\generated\res\resValues\androidTest\debug
+com.bdk.studio.test.app-mergeDebugAndroidTestResources-1 C:\Bdk2.0\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.bdk.studio.test.app-mergeDebugAndroidTestResources-2 C:\Bdk2.0\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.bdk.studio.test.app-debugAndroidTest-3 C:\Bdk2.0\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
+com.bdk.studio.test.app-jetified-core-1.6.1-4 C:\Users\jauro\.gradle\caches\transforms-3\fe00a33bb1d3ea032d5f1185dd2ffe31\transformed\jetified-core-1.6.1\res

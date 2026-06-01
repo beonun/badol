@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+        MaterialComponents 테마: ripple 효과, 입체 버튼, 일관된 UI
+        코드에서 setSupportActionBar(toolbar)를 직접 호출
+    -->
+    <style name="Theme.Badol" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">#1B5E20</item>
+        <item name="colorPrimaryVariant">#1B5E20</item>
+        <item name="colorPrimaryDark">#1B5E20</item>
+        <item name="colorAccent">#43A047</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="android:windowBackground">@color/bg_app</item>
+        <!-- 상태표시줄: 진한 그린 배경 + 흰색 아이콘 -->
+        <item name="android:statusBarColor">#1B5E20</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <!-- 오버플로 팝업 메뉴: 흰 배경 + 검정 텍스트 -->
+        <item name="actionOverflowMenuStyle">@style/BdkOverflowMenu</item>
+        <!-- 기본 버튼 스타일 -->
+        <item name="materialButtonStyle">@style/BdkButton</item>
+    </style>
+
+    <style name="BdkOverflowMenu" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <!-- 입체감 있는 버튼 스타일 (눌림 효과 포함) -->
+    <style name="BdkButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:minHeight">44dp</item>
+        <item name="elevation">4dp</item>
+        <item name="android:stateListAnimator">@animator/button_state_list_animator</item>
+        <item name="cornerRadius">6dp</item>
+    </style>
+
+    <!-- 작은 버튼 (흑→백, ↩ 취소 등) -->
+    <style name="BdkButton.Small" parent="BdkButton">
+        <item name="android:textSize">13sp</item>
+        <item name="android:minHeight">40dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+    </style>
+
+</resources>

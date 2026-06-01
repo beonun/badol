@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_select_section"
+        android:title="기보 선택"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_numbers"
+        android:title="착수 번호 표시"
+        android:orderInCategory="200"
+        android:checkable="true"
+        android:checked="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_coords"
+        android:title="좌표 표시"
+        android:orderInCategory="300"
+        android:checkable="true"
+        android:checked="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sound"
+        android:title="착수음"
+        android:orderInCategory="400"
+        android:checkable="true"
+        android:checked="true"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_show_stone_comment"
+        android:title="돌 설명 표시"
+        android:orderInCategory="350"
+        android:checkable="true"
+        android:checked="false"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_open_editor"
+        android:title="편집기로 열기"
+        android:orderInCategory="500"
+        app:showAsAction="never" />
+
+</menu>
