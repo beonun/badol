@@ -1163,6 +1163,9 @@ public class EditorActivity extends AppCompatActivity {
         if (id == android.R.id.home) {
             confirmExit();
             return true;
+        } else if (id == R.id.action_game_info) {
+            showGameInfoDialog();
+            return true;
         } else if (id == R.id.action_select_section) {
             showSectionDialog();
             return true;
@@ -1276,6 +1279,73 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     // ── 뒤로가기 확인 ─────────────────────────────────
+
+    // 게임 정보 다이얼로그
+
+    private void showGameInfoDialog() {
+        if (sections.isEmpty()) {
+            Toast.makeText(this, "서션이 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        BdkSection base = sections.get(0);
+
+        LinearLayout layout = new LinearLayout(this);
+        layout.setOrientation(LinearLayout.VERTICAL);
+        int pad = (int)(16 * getResources().getDisplayMetrics().density);
+        layout.setPadding(pad, pad, pad, pad);
+
+        EditText etPB   = addLabeledField(layout, "흐 기사명", base.playerBlack);
+        EditText etBR   = addLabeledField(layout, "흐 단급", base.rankBlack);
+        EditText etPW   = addLabeledField(layout, "백 기사명", base.playerWhite);
+        EditText etWR   = addLabeledField(layout, "백 단급", base.rankWhite);
+        EditText etKomi = addLabeledField(layout, "덤 (KM)", base.komi);
+        EditText etRE   = addLabeledField(layout, "결과 (RE)", base.result);
+        EditText etDT   = addLabeledField(layout, "날짜 (DT)", base.date);
+        EditText etEV   = addLabeledField(layout, "대회명 (EV)", base.event);
+        EditText etPC   = addLabeledField(layout, "장소 (PC)", base.place);
+        EditText etRO   = addLabeledField(layout, "라운드 (RO)", base.round);
+
+        android.widget.ScrollView sv = new android.widget.ScrollView(this);
+        sv.addView(layout);
+
+        new AlertDialog.Builder(this)
+            .setTitle("게임 정보")
+            .setView(sv)
+            .setPositiveButton("확인", (d, w) -> {
+                base.playerBlack = etPB.getText().toString().trim();
+                base.rankBlack   = etBR.getText().toString().trim();
+                base.playerWhite = etPW.getText().toString().trim();
+                base.rankWhite   = etWR.getText().toString().trim();
+                base.komi        = etKomi.getText().toString().trim();
+                base.result      = etRE.getText().toString().trim();
+                base.date        = etDT.getText().toString().trim();
+                base.event       = etEV.getText().toString().trim();
+                base.place       = etPC.getText().toString().trim();
+                base.round       = etRO.getText().toString().trim();
+                Toast.makeText(this, "게임 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show();
+            })
+            .setNegativeButton("취소", null)
+            .show();
+    }
+
+    /** 레이블 + 입력필드 생성 헬퍼 */
+    private EditText addLabeledField(LinearLayout parent, String label, String value) {
+        TextView tv = new TextView(this);
+        tv.setText(label);
+        tv.setTextSize(12f);
+        tv.setPadding(0, (int)(8 * getResources().getDisplayMetrics().density), 0, 2);
+        parent.addView(tv);
+
+        EditText et = new EditText(this);
+        et.setText(value != null ? value : "");
+        et.setInputType(InputType.TYPE_CLASS_TEXT);
+        et.setSingleLine(true);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        et.setLayoutParams(lp);
+        parent.addView(et);
+        return et;
+    }
 
     private void confirmExit() {
         new AlertDialog.Builder(this)

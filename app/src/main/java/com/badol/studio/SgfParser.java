@@ -261,6 +261,18 @@ public class SgfParser {
         // seq 기준 정렬
         base.initialStones.sort(Comparator.comparingInt(a -> a[3]));
 
+        // 게임 정보
+        String pb = rootNode.getFirst("PB"); if (pb != null) base.playerBlack = pb;
+        String pw = rootNode.getFirst("PW"); if (pw != null) base.playerWhite = pw;
+        String br = rootNode.getFirst("BR"); if (br != null) base.rankBlack = br;
+        String wr = rootNode.getFirst("WR"); if (wr != null) base.rankWhite = wr;
+        String km = rootNode.getFirst("KM"); if (km != null) base.komi = km;
+        String re = rootNode.getFirst("RE"); if (re != null) base.result = re;
+        String dt = rootNode.getFirst("DT"); if (dt != null) base.date = dt;
+        String ev = rootNode.getFirst("EV"); if (ev != null) base.event = ev;
+        String pc = rootNode.getFirst("PC"); if (pc != null) base.place = pc;
+        String ro = rootNode.getFirst("RO"); if (ro != null) base.round = ro;
+
         // 루트 노드 주석
         String rootComment = rootNode.getFirst("C");
         if (rootComment != null) base.comment = rootComment;

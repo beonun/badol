@@ -16,7 +16,7 @@ public class BdkSection {
     /** 착수 목록: [moveNum(1-based), color, x, y] */
     public List<int[]> moves = new ArrayList<>();
 
-    /** 섹션 전체 주석 (RTF 텍스트) */
+    /** 섹션 전체 주석 */
     public String comment = "";
 
     /**
@@ -36,6 +36,38 @@ public class BdkSection {
     public boolean hasZoom() {
         return zoomX1 > 0 && zoomY1 > 0 && zoomX2 > zoomX1 && zoomY2 > zoomY1;
     }
+
+    // ── 게임 정보 (SGF 루트 속성, sections[0]에만 저장) ──────────────────────
+
+    /** 흑 기사명 (SGF: PB) */
+    public String playerBlack = "";
+
+    /** 백 기사명 (SGF: PW) */
+    public String playerWhite = "";
+
+    /** 흑 기사 단급 (SGF: BR) */
+    public String rankBlack = "";
+
+    /** 백 기사 단급 (SGF: WR) */
+    public String rankWhite = "";
+
+    /** 덤 (SGF: KM, 예: "6.5") */
+    public String komi = "";
+
+    /** 결과 (SGF: RE, 예: "B+3.5", "W+R") */
+    public String result = "";
+
+    /** 날짜 (SGF: DT, 예: "2024-01-01") */
+    public String date = "";
+
+    /** 대회/이벤트명 (SGF: EV) */
+    public String event = "";
+
+    /** 장소 (SGF: PC) */
+    public String place = "";
+
+    /** 라운드 (SGF: RO) */
+    public String round = "";
 
     // color 상수
     public static final int BLACK = 1;

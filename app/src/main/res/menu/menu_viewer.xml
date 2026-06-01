@@ -41,6 +41,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_game_info"
+        android:title="게임 정보"
+        android:orderInCategory="50"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_open_editor"
         android:title="편집기로 열기"
         android:orderInCategory="500"

@@ -51,6 +51,18 @@ public class SgfWriter {
             sb.append("GN[").append(escapeSgf(base.name)).append("]\n");
         }
 
+        // 게임 정보
+        if (!isEmpty(base.playerBlack))  sb.append("PB[").append(escapeSgf(base.playerBlack)).append("]\n");
+        if (!isEmpty(base.rankBlack))    sb.append("BR[").append(escapeSgf(base.rankBlack)).append("]\n");
+        if (!isEmpty(base.playerWhite))  sb.append("PW[").append(escapeSgf(base.playerWhite)).append("]\n");
+        if (!isEmpty(base.rankWhite))    sb.append("WR[").append(escapeSgf(base.rankWhite)).append("]\n");
+        if (!isEmpty(base.komi))         sb.append("KM[").append(escapeSgf(base.komi)).append("]\n");
+        if (!isEmpty(base.result))       sb.append("RE[").append(escapeSgf(base.result)).append("]\n");
+        if (!isEmpty(base.date))         sb.append("DT[").append(escapeSgf(base.date)).append("]\n");
+        if (!isEmpty(base.event))        sb.append("EV[").append(escapeSgf(base.event)).append("]\n");
+        if (!isEmpty(base.place))        sb.append("PC[").append(escapeSgf(base.place)).append("]\n");
+        if (!isEmpty(base.round))        sb.append("RO[").append(escapeSgf(base.round)).append("]\n");
+
         // 기본도 돌 (AB/AW)
         if (!base.initialStones.isEmpty()) {
             // seq 순서로 정렬
@@ -162,6 +174,8 @@ public class SgfWriter {
     }
 
     // ── SGF 이스케이프 ────────────────────────────────
+
+    private static boolean isEmpty(String s) { return s == null || s.trim().isEmpty(); }
 
     /** SGF 속성값 이스케이프: ']' → '\]', '\' → '\\' */
     static String escapeSgf(String s) {

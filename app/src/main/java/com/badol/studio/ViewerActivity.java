@@ -978,10 +978,54 @@ public class ViewerActivity extends AppCompatActivity {
             showStoneComment = !item.isChecked();
             item.setChecked(showStoneComment);
             Toast.makeText(this, "돌 설명 표시 " + (showStoneComment ? "ON" : "OFF"), Toast.LENGTH_SHORT).show();
+        } else if (id == R.id.action_game_info) {
+            showGameInfoDialog();
         } else if (id == R.id.action_open_editor) {
             openInEditor();
         }
         return true;
+    }
+
+    // 게임 정보 다이얼로그 (읽기 전용)
+
+    private void showGameInfoDialog() {
+        if (sections.isEmpty()) {
+            Toast.makeText(this, "기보 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        BdkSection base = sections.get(0);
+
+        StringBuilder sb = new StringBuilder();
+        appendInfo(sb, "흐 기사", base.playerBlack, base.rankBlack);
+        appendInfo(sb, "백 기사", base.playerWhite, base.rankWhite);
+        appendInfoLine(sb, "덤", base.komi);
+        appendInfoLine(sb, "결과", base.result);
+        appendInfoLine(sb, "날짜", base.date);
+        appendInfoLine(sb, "대회", base.event);
+        appendInfoLine(sb, "장소", base.place);
+        appendInfoLine(sb, "라운드", base.round);
+
+        String msg = sb.toString().trim();
+        if (msg.isEmpty()) msg = "게임 정보가 없습니다.";
+
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+            .setTitle("게임 정보")
+            .setMessage(msg)
+            .setPositiveButton("확인", null)
+            .show();
+    }
+
+    private void appendInfo(StringBuilder sb, String label, String name, String rank) {
+        if ((name == null || name.trim().isEmpty()) && (rank == null || rank.trim().isEmpty())) return;
+        sb.append(label).append(": ");
+        if (name != null && !name.trim().isEmpty()) sb.append(name.trim());
+        if (rank != null && !rank.trim().isEmpty()) sb.append(" (").append(rank.trim()).append(")");
+        sb.append("\n");
+    }
+
+    private void appendInfoLine(StringBuilder sb, String label, String value) {
+        if (value == null || value.trim().isEmpty()) return;
+        sb.append(label).append(": ").append(value.trim()).append("\n");
     }
 
     private void openInEditor() {

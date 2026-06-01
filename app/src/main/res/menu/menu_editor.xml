@@ -15,6 +15,12 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/action_game_info"
+        android:title="게임 정보"
+        android:orderInCategory="250"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_select_section"
         android:title="기보 선택"
         android:orderInCategory="300"
