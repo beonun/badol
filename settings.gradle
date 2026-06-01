@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Bdk20"
+rootProject.name = "badol"
 include ':app'
