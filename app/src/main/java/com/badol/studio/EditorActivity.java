@@ -107,6 +107,10 @@ public class EditorActivity extends AppCompatActivity {
     private Button btnToolLabel;
     private Button btnToolEraseMarker;
 
+    // ── 전체화면 모드 ──────────────────────────────────
+    private android.widget.ImageButton btnFullscreen;
+    private boolean isFullscreen = false;
+
     // ── 바둑판 상태 ───────────────────────────────────
     private int[][] boardState;   // [y][x] 0=빈, 1=흑, 2=백
     private int[][] moveNumbers;  // [y][x] 표시 번호 (rebuildState로 재계산)
@@ -231,6 +235,9 @@ public class EditorActivity extends AppCompatActivity {
         btnToolX           = findViewById(R.id.btnToolX);
         btnToolLabel       = findViewById(R.id.btnToolLabel);
         btnToolEraseMarker = findViewById(R.id.btnToolEraseMarker);
+
+        // 전체화면 버튼 (태블릿 전용, 없으면 null)
+        btnFullscreen = findViewById(R.id.btnFullscreen);
     }
 
     private void setupBoardView() {
@@ -364,6 +371,11 @@ public class EditorActivity extends AppCompatActivity {
             btnToolLabel.setOnClickListener(v -> selectTool(TOOL_LABEL));
             btnToolEraseMarker.setOnClickListener(v -> selectTool(TOOL_ERASE));
         }
+
+        // 전체화면 버튼
+        if (btnFullscreen != null) {
+            btnFullscreen.setOnClickListener(v -> toggleFullscreen());
+        }
     }
 
     private void setupSectionList() {
@@ -371,6 +383,31 @@ public class EditorActivity extends AppCompatActivity {
         lvSections.setAdapter(sectionAdapter);
         lvSections.setChoiceMode(ListView.CHOICE_MODE_NONE);
         lvSections.setOnItemClickListener((parent, view, position, id) -> switchToSection(position));
+    }
+
+    // ── 전체화면 모드 ────────────────────────────────
+
+    private void toggleFullscreen() {
+        isFullscreen = !isFullscreen;
+        android.view.View bottomPanel = findViewById(R.id.bottomPanel);
+        if (bottomPanel != null) {
+            bottomPanel.setVisibility(isFullscreen ? android.view.View.GONE : android.view.View.VISIBLE);
+        }
+        if (markerToolbar != null) {
+            markerToolbar.setVisibility(isFullscreen ? android.view.View.GONE : android.view.View.VISIBLE);
+        }
+        // 아이콘 변경: 전체화면 중에는 축소 아이콘, 일반 시는 확대 아이콘
+        if (btnFullscreen != null) {
+            btnFullscreen.setImageResource(
+                isFullscreen
+                    ? android.R.drawable.ic_menu_close_clear_cancel
+                    : android.R.drawable.ic_menu_zoom);
+        }
+        // 액션바 숨김/표시
+        if (getSupportActionBar() != null) {
+            if (isFullscreen) getSupportActionBar().hide();
+            else getSupportActionBar().show();
+        }
     }
 
     // ── 마커 도구 선택 ───────────────────────────────
