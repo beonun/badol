@@ -31,11 +31,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- 바둑판 영역 (weight=60) -->
+    <!-- 바둑판 영역 (weight=50) -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="60"
+        android:layout_weight="50"
         android:orientation="vertical"
         android:background="@color/board_color">
 
@@ -54,12 +54,12 @@
 
     </LinearLayout>
 
-    <!-- 하단 컨트롤 영역 (weight=40) -->
+    <!-- 하단 컨트롤 영역 (weight=50) -->
     <LinearLayout
         android:id="@+id/bottomPanel"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="40"
+        android:layout_weight="50"
         android:orientation="vertical"
         android:background="#FFFFFF">
 
