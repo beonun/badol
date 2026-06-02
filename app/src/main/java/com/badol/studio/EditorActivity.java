@@ -431,7 +431,7 @@ public class EditorActivity extends AppCompatActivity {
 
         int transparent = android.graphics.Color.TRANSPARENT;
         int white       = android.graphics.Color.WHITE;
-        int darkText    = android.graphics.Color.parseColor("#555555");
+        int darkText    = android.graphics.Color.WHITE; // 올리브 배경에 흰색 기호
         int primary     = getResources().getColor(R.color.primary, null);
         int del         = getResources().getColor(R.color.btn_del, null);
 
@@ -449,11 +449,12 @@ public class EditorActivity extends AppCompatActivity {
             markerBtns[i].setTextColor(selected ? white : darkText);
         }
 
-        // 지우기 버튼
+        // 지우기 버튼 (올리브 배경에서 연한 살몸색으로 표시)
         boolean eraseSelected = (currentTool == TOOL_ERASE);
+        int eraseLightColor = android.graphics.Color.parseColor("#FFAB91"); // 연한 살몰
         btnToolEraseMarker.setBackgroundTintList(
             android.content.res.ColorStateList.valueOf(eraseSelected ? del : transparent));
-        btnToolEraseMarker.setTextColor(eraseSelected ? white : del);
+        btnToolEraseMarker.setTextColor(eraseSelected ? white : eraseLightColor);
     }
 
     // ── 신규 시작 ─────────────────────────────────────
