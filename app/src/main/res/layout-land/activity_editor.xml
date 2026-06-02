@@ -202,7 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible"
-            android:background="#6B7C3A"
+            android:background="#996B7C3A"
             android:scrollbars="none">
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -230,7 +230,10 @@
                     app:strokeColor="#AAFFFFFF"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolCircle"
                     android:layout_width="wrap_content"
@@ -248,7 +251,10 @@
                     app:strokeColor="#AAFFFFFF"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolSquare"
                     android:layout_width="wrap_content"
@@ -266,7 +272,10 @@
                     app:strokeColor="#AAFFFFFF"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolX"
                     android:layout_width="wrap_content"
@@ -284,7 +293,10 @@
                     app:strokeColor="#AAFFFFFF"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolLabel"
                     android:layout_width="wrap_content"
@@ -302,7 +314,10 @@
                     app:strokeColor="#AAFFFFFF"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnToolEraseMarker"
                     android:layout_width="wrap_content"
@@ -318,7 +333,10 @@
                     app:strokeColor="@color/btn_del_light"
                     app:strokeWidth="1dp"
                     app:cornerRadius="4dp"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:gravity="center" />
             </LinearLayout>
         </HorizontalScrollView>
 
