@@ -171,6 +171,7 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public void onConfigurationChanged(android.content.res.Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
+        // 화면 회전/크기 변경 시 올바른 레이아웃 재적용 (Android가 qualifier 자동 선택)
         setContentView(R.layout.activity_editor);
         String rotTitle = (loadedFilePath != null)
                 ? new java.io.File(loadedFilePath).getName()
@@ -823,8 +824,8 @@ public class EditorActivity extends AppCompatActivity {
     private void onBoardTouch(int x, int y) {
         if (x < 1 || x > 19 || y < 1 || y > 19) return;
 
-        // 마커 도구 모드: 착수 입력 모드에서만 작동
-        if (!isBaseMode && currentTool != TOOL_MOVE) {
+        // 마커 도구 모드: 입력/착수 모드 모두 작동
+        if (currentTool != TOOL_MOVE) {
             handleMarkerTouch(x, y);
             return;
         }
@@ -1114,17 +1115,13 @@ public class EditorActivity extends AppCompatActivity {
         if (isBaseMode) {
             tvModeInfo.setText(currentSectionIdx == 0 ? "기본도 입력 모드" : "입력 모드 (기본도 수정)");
             btnToggleMode.setText("착수 입력으로 전환");
-            // 배치 모드에서는 마커 팔레트 숨김
-            if (markerToolbar != null) markerToolbar.setVisibility(View.GONE);
-            // 도구를 착수 모드로 초기화
-            currentTool = TOOL_MOVE;
         } else {
             tvModeInfo.setText("착수 입력 모드");
             btnToggleMode.setText("입력 모드로 전환");
-            // 착수 입력 모드에서는 마커 팔레트 표시
-            if (markerToolbar != null) markerToolbar.setVisibility(View.VISIBLE);
-            updateMarkerToolUI();
         }
+        // 마커 팔레트는 입력/착수 모드 모두 표시
+        if (markerToolbar != null) markerToolbar.setVisibility(View.VISIBLE);
+        updateMarkerToolUI();
         btnToggleMode.setEnabled(true);
         btnToggleMode.setBackgroundTintList(
             android.content.res.ColorStateList.valueOf(

@@ -203,12 +203,12 @@
 
         </LinearLayout>
 
-        <!-- 마커 도구 팔레트 (착수 입력 모드에서만 표시) -->
+        <!-- 마커 도구 팔레트 -->
         <HorizontalScrollView
             android:id="@+id/markerToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@color/bg_action_bar"
             android:scrollbars="none">
             <LinearLayout
