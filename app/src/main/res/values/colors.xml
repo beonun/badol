@@ -11,8 +11,8 @@
     <color name="btn_open">#388E3C</color>         <!-- 파일 열기 -->
     <color name="btn_new">#43A047</color>          <!-- 새 기보 -->
     <color name="btn_add">#388E3C</color>          <!-- 기보 추가 -->
-    <color name="btn_del">#CCCB4335</color>       <!-- 삭제 (클래식 벽돌 80% 투명) -->
-    <color name="btn_undo">#CCCB4335</color>       <!-- 실행 취소 (클래식 벽돌 80% 투명) -->
+    <color name="btn_del">#CB4335</color>          <!-- 삭제 (클래식 벽돌) -->
+    <color name="btn_undo">#CB4335</color>          <!-- 실행 취소 (클래식 벽돌) -->
     <color name="btn_toggle_mode">#2E7D32</color>  <!-- 모드 전환 -->
     <color name="btn_try_move">#388E3C</color>     <!-- 놓아보기 -->
     <color name="btn_neutral">#546E7A</color>      <!-- 흑→백 전환 (중립) -->
