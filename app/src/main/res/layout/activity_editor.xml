@@ -161,9 +161,8 @@
             <!-- 모드 전환 버튼 (활성 상태에 따라 Java에서 색상 변경) -->
             <Button
                 android:id="@+id/btnToggleMode"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_height"
-                android:layout_weight="2"
                 android:layout_marginEnd="4dp"
                 android:text="입력 모드"
                 android:textSize="@dimen/btn_text_size"
@@ -175,9 +174,8 @@
             <!-- 기보 추가 버튼 -->
             <Button
                 android:id="@+id/btnAddSection"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_height"
-                android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
                 android:text="+ 기보"
@@ -190,9 +188,8 @@
             <!-- 기보 삭제 버튼 -->
             <Button
                 android:id="@+id/btnDelSection"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="@dimen/btn_height"
-                android:layout_weight="1"
                 android:layout_marginStart="4dp"
                 android:text="삭제"
                 android:textSize="@dimen/btn_text_size"

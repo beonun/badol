@@ -439,8 +439,9 @@ public class EditorActivity extends AppCompatActivity {
             android.content.res.ColorStateList.valueOf(currentTool == TOOL_X ? primary : neutral));
         btnToolLabel.setBackgroundTintList(
             android.content.res.ColorStateList.valueOf(currentTool == TOOL_LABEL ? primary : neutral));
+        int delLight = getResources().getColor(R.color.btn_del_light, null);
         btnToolEraseMarker.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_ERASE ? del : neutral));
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_ERASE ? del : delLight));
     }
 
     // ── 신규 시작 ─────────────────────────────────────
