@@ -217,10 +217,9 @@
                 android:orientation="horizontal"
                 android:paddingStart="6dp"
                 android:paddingEnd="6dp"
-                android:paddingTop="3dp"
-                android:paddingBottom="3dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
                 android:gravity="center_vertical">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -228,91 +227,83 @@
                     android:textSize="11sp"
                     android:textColor="@color/text_hint"
                     android:layout_marginEnd="4dp" />
-
-
-                <!-- 삼각형 마커 -->
                 <Button
                     android:id="@+id/btnToolTriangle"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:layout_marginEnd="6dp"
                     android:text="△"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_marker"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
-                <!-- 원 마커 -->
                 <Button
                     android:id="@+id/btnToolCircle"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:layout_marginEnd="6dp"
                     android:text="○"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_marker"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
-                <!-- 사각 마커 -->
                 <Button
                     android:id="@+id/btnToolSquare"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:layout_marginEnd="6dp"
                     android:text="□"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_marker"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
-                <!-- 엑스 마커 -->
                 <Button
                     android:id="@+id/btnToolX"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:layout_marginEnd="6dp"
                     android:text="✕"
                     android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_marker"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
-                <!-- 레이블 마커 -->
                 <Button
                     android:id="@+id/btnToolLabel"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:layout_marginEnd="6dp"
                     android:text="A"
-                    android:textSize="13sp"
+                    android:textSize="14sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_marker"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
-                <!-- 마커 지우개 -->
                 <Button
                     android:id="@+id/btnToolEraseMarker"
                     android:layout_width="wrap_content"
-                    android:layout_height="28dp"
+                    android:layout_height="32dp"
+                    android:minHeight="0dp"
                     android:text="지우기"
-                    android:textSize="11sp"
+                    android:textSize="12sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/btn_del"
-                    android:paddingStart="8dp"
-                            android:paddingEnd="8dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     style="?attr/materialButtonStyle" />
-
             </LinearLayout>
         </HorizontalScrollView>
 
