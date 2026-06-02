@@ -144,10 +144,47 @@ public class SgfWriter {
         // LB (착수 외 돌 설명)
         appendLB(sb, sec);
 
-        // VW (줌 영역)
+        // 마커 (TR/CR/SQ/MA/AR/LN)
+        appendMarkers(sb, sec);
+
+        // VW (줄 영역)
         if (sec.hasZoom()) {
             sb.append("VW[").append(xyToSgf(sec.zoomX1, sec.zoomY1))
               .append(":").append(xyToSgf(sec.zoomX2, sec.zoomY2)).append("]");
+        }
+    }
+
+    /** 마커 속성 출력 (TR/CR/SQ/MA/LB/AR/LN) */
+    private static void appendMarkers(StringBuilder sb, BdkSection sec) {
+        if (!sec.markersTriangle.isEmpty()) {
+            sb.append("TR");
+            for (int[] m : sec.markersTriangle) sb.append("[").append(xyToSgf(m[0], m[1])).append("]");
+        }
+        if (!sec.markersCircle.isEmpty()) {
+            sb.append("CR");
+            for (int[] m : sec.markersCircle) sb.append("[").append(xyToSgf(m[0], m[1])).append("]");
+        }
+        if (!sec.markersSquare.isEmpty()) {
+            sb.append("SQ");
+            for (int[] m : sec.markersSquare) sb.append("[").append(xyToSgf(m[0], m[1])).append("]");
+        }
+        if (!sec.markersX.isEmpty()) {
+            sb.append("MA");
+            for (int[] m : sec.markersX) sb.append("[").append(xyToSgf(m[0], m[1])).append("]");
+        }
+        for (Map.Entry<String, String> e : sec.markersLabel.entrySet()) {
+            String[] parts = e.getKey().split(",");
+            if (parts.length != 2) continue;
+            try {
+                int x = Integer.parseInt(parts[0]), y = Integer.parseInt(parts[1]);
+                sb.append("LB[").append(xyToSgf(x, y)).append(":").append(escapeSgf(e.getValue())).append("]");
+            } catch (NumberFormatException ignored) {}
+        }
+        for (int[] m : sec.markersArrow) {
+            sb.append("AR[").append(xyToSgf(m[0], m[1])).append(":").append(xyToSgf(m[2], m[3])).append("]");
+        }
+        for (int[] m : sec.markersLine) {
+            sb.append("LN[").append(xyToSgf(m[0], m[1])).append(":").append(xyToSgf(m[2], m[3])).append("]");
         }
     }
 

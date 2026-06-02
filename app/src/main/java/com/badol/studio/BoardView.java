@@ -6,12 +6,18 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RadialGradient;
+import android.graphics.RectF;
 import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 바둑판 뷰
@@ -38,6 +44,15 @@ public class BoardView extends View {
     private int[][] moveNum;
     private int lastX = -1, lastY = -1;
     private int triX  = -1, triY  = -1;
+
+    // 마커 데이터 (BdkSection에서 설정)
+    private List<int[]> markersTriangle = new ArrayList<>();
+    private List<int[]> markersCircle   = new ArrayList<>();
+    private List<int[]> markersSquare   = new ArrayList<>();
+    private List<int[]> markersX        = new ArrayList<>();
+    private Map<String, String> markersLabel = new HashMap<>();
+    private List<int[]> markersArrow    = new ArrayList<>();
+    private List<int[]> markersLine     = new ArrayList<>();
 
     private TouchListener     touchListener;
     private DoubleTapListener doubleTapListener;
@@ -69,6 +84,8 @@ public class BoardView extends View {
     private final Paint coordPaint  = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint markPaint   = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint triPaint    = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Paint markerPaint = new Paint(Paint.ANTI_ALIAS_FLAG); // 원/사각/엑스/화살표
+    private final Paint labelPaint  = new Paint(Paint.ANTI_ALIAS_FLAG); // 레이블 텍스트
     private final Paint shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     private final Paint stonePaint  = new Paint(Paint.ANTI_ALIAS_FLAG); // 돌 그리기용 재사용
@@ -105,6 +122,12 @@ public class BoardView extends View {
 
         triPaint.setStyle(Paint.Style.STROKE);
         triPaint.setStrokeWidth(2.5f);
+
+        markerPaint.setStyle(Paint.Style.STROKE);
+        markerPaint.setStrokeWidth(2.5f);
+
+        labelPaint.setTextAlign(Paint.Align.CENTER);
+        labelPaint.setFakeBoldText(true);
 
         shadowPaint.setColor(0x44000000);
         shadowPaint.setStyle(Paint.Style.FILL);
@@ -175,6 +198,30 @@ public class BoardView extends View {
 
     /** 드래그 착수 모드 설정 (에디터: true, 뷰어: false) */
     public void setDragPlaceMode(boolean enabled) { dragPlaceMode = enabled; }
+
+    /** BdkSection의 마커 데이터를 일괄 설정 */
+    public void setMarkers(BdkSection sec) {
+        markersTriangle = sec != null ? sec.markersTriangle : new ArrayList<>();
+        markersCircle   = sec != null ? sec.markersCircle   : new ArrayList<>();
+        markersSquare   = sec != null ? sec.markersSquare   : new ArrayList<>();
+        markersX        = sec != null ? sec.markersX        : new ArrayList<>();
+        markersLabel    = sec != null ? sec.markersLabel    : new HashMap<>();
+        markersArrow    = sec != null ? sec.markersArrow    : new ArrayList<>();
+        markersLine     = sec != null ? sec.markersLine     : new ArrayList<>();
+        invalidate();
+    }
+
+    /** 마커 전체 제거 */
+    public void clearMarkers() {
+        markersTriangle.clear();
+        markersCircle.clear();
+        markersSquare.clear();
+        markersX.clear();
+        markersLabel.clear();
+        markersArrow.clear();
+        markersLine.clear();
+        invalidate();
+    }
 
     /** 드래그 중 표시할 미리보기 돌 색 설정 */
     public void setHoverColor(int color) { hoverColor = color; }
@@ -330,6 +377,7 @@ public class BoardView extends View {
         drawStarPoints(canvas);
         if (showCoords) drawCoordinates(canvas);
         drawStones(canvas);
+        drawAllMarkers(canvas);
         // 반투명 미리보기 돌은 실제 돌 위에 그려야 하므로 마지막에
         if (dragPlaceMode && hoverX >= 1 && hoverY >= 1
                 && board[hoverY][hoverX] == BdkSection.EMPTY) {
@@ -446,6 +494,119 @@ public class BoardView extends View {
             path.close();
             canvas.drawPath(path, triPaint);
         }
+    }
+
+    // ── 마커 그리기 ─────────────────────────────────────
+
+    private void drawAllMarkers(Canvas canvas) {
+        if (cell == 0) return;
+        // 삼각형 (TR)
+        for (int[] m : markersTriangle) drawTriangleMarker(canvas, m[0], m[1]);
+        // 원 (CR)
+        for (int[] m : markersCircle)   drawCircleMarker(canvas, m[0], m[1]);
+        // 사각 (SQ)
+        for (int[] m : markersSquare)   drawSquareMarker(canvas, m[0], m[1]);
+        // 엑스 (MA)
+        for (int[] m : markersX)        drawXMarker(canvas, m[0], m[1]);
+        // 레이블 (LB)
+        for (Map.Entry<String, String> e : markersLabel.entrySet()) {
+            String[] parts = e.getKey().split(",");
+            if (parts.length == 2) {
+                try {
+                    int x = Integer.parseInt(parts[0]);
+                    int y = Integer.parseInt(parts[1]);
+                    drawLabelMarker(canvas, x, y, e.getValue());
+                } catch (NumberFormatException ignored) {}
+            }
+        }
+        // 화살표 (AR)
+        for (int[] m : markersArrow) drawArrowMarker(canvas, m[0], m[1], m[2], m[3]);
+        // 선 (LN)
+        for (int[] m : markersLine)  drawLineMarker(canvas, m[0], m[1], m[2], m[3]);
+    }
+
+    /** 마커 색: 돌 위이면 돌 반대색, 빈 교차점이면 검정 */
+    private int markerColor(int bx, int by) {
+        int stone = (bx >= 1 && bx <= size && by >= 1 && by <= size) ? board[by][bx] : BdkSection.EMPTY;
+        if (stone == BdkSection.BLACK) return Color.WHITE;
+        if (stone == BdkSection.WHITE) return Color.BLACK;
+        return Color.BLACK;
+    }
+
+    private void drawTriangleMarker(Canvas canvas, int bx, int by) {
+        float cx = left + (bx-1)*cell, cy = top + (by-1)*cell;
+        float tr = radius * 0.55f;
+        triPaint.setColor(markerColor(bx, by));
+        Path path = new Path();
+        path.moveTo(cx,             cy - tr);
+        path.lineTo(cx - tr*0.866f, cy + tr*0.5f);
+        path.lineTo(cx + tr*0.866f, cy + tr*0.5f);
+        path.close();
+        canvas.drawPath(path, triPaint);
+    }
+
+    private void drawCircleMarker(Canvas canvas, int bx, int by) {
+        float cx = left + (bx-1)*cell, cy = top + (by-1)*cell;
+        float mr = radius * 0.55f;
+        markerPaint.setColor(markerColor(bx, by));
+        canvas.drawCircle(cx, cy, mr, markerPaint);
+    }
+
+    private void drawSquareMarker(Canvas canvas, int bx, int by) {
+        float cx = left + (bx-1)*cell, cy = top + (by-1)*cell;
+        float half = radius * 0.50f;
+        markerPaint.setColor(markerColor(bx, by));
+        canvas.drawRect(cx - half, cy - half, cx + half, cy + half, markerPaint);
+    }
+
+    private void drawXMarker(Canvas canvas, int bx, int by) {
+        float cx = left + (bx-1)*cell, cy = top + (by-1)*cell;
+        float d = radius * 0.50f;
+        markerPaint.setColor(markerColor(bx, by));
+        canvas.drawLine(cx - d, cy - d, cx + d, cy + d, markerPaint);
+        canvas.drawLine(cx + d, cy - d, cx - d, cy + d, markerPaint);
+    }
+
+    private void drawLabelMarker(Canvas canvas, int bx, int by, String label) {
+        float cx = left + (bx-1)*cell, cy = top + (by-1)*cell;
+        labelPaint.setColor(markerColor(bx, by));
+        labelPaint.setTextSize(radius * 0.95f);
+        canvas.drawText(label, cx, cy + labelPaint.getTextSize() * 0.35f, labelPaint);
+    }
+
+    private void drawArrowMarker(Canvas canvas, int x1, int y1, int x2, int y2) {
+        float ax = left + (x1-1)*cell, ay = top + (y1-1)*cell;
+        float bx2 = left + (x2-1)*cell, by2 = top + (y2-1)*cell;
+        markerPaint.setColor(0xFF0066CC);
+        markerPaint.setStrokeWidth(2.5f);
+        canvas.drawLine(ax, ay, bx2, by2, markerPaint);
+        // 화살촉
+        float dx = bx2 - ax, dy = by2 - ay;
+        float len = (float) Math.sqrt(dx*dx + dy*dy);
+        if (len < 1) return;
+        float ux = dx/len, uy = dy/len;
+        float hw = cell * 0.18f, hl = cell * 0.28f;
+        float lx = bx2 - ux*hl - uy*hw;
+        float ly = by2 - uy*hl + ux*hw;
+        float rx = bx2 - ux*hl + uy*hw;
+        float ry = by2 - uy*hl - ux*hw;
+        Path arrowHead = new Path();
+        arrowHead.moveTo(bx2, by2);
+        arrowHead.lineTo(lx, ly);
+        arrowHead.lineTo(rx, ry);
+        arrowHead.close();
+        Paint fillPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        fillPaint.setStyle(Paint.Style.FILL);
+        fillPaint.setColor(0xFF0066CC);
+        canvas.drawPath(arrowHead, fillPaint);
+    }
+
+    private void drawLineMarker(Canvas canvas, int x1, int y1, int x2, int y2) {
+        float ax = left + (x1-1)*cell, ay = top + (y1-1)*cell;
+        float bx2 = left + (x2-1)*cell, by2 = top + (y2-1)*cell;
+        markerPaint.setColor(0xFF0066CC);
+        markerPaint.setStrokeWidth(2.5f);
+        canvas.drawLine(ax, ay, bx2, by2, markerPaint);
     }
 
     // ── 터치 이벤트 ───────────────────────────────────

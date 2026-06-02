@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.LinkedHashMap;
 
 /** BDK 파일 내 하나의 섹션 (기본도/정해도/오답도 등) */
 public class BdkSection {
@@ -24,6 +25,40 @@ public class BdkSection {
      * 예: stoneComments.get("9,11") = "흑1 설명"
      */
     public Map<String, String> stoneComments = new HashMap<>();
+
+    // ── 마커 (SGF: TR/CR/SQ/MA/LB/AR) ──────────────────────────────────────
+
+    /** 삼각형 마커 좌표 목록: [x, y] (SGF: TR) */
+    public List<int[]> markersTriangle = new ArrayList<>();
+
+    /** 원 마커 좌표 목록: [x, y] (SGF: CR) */
+    public List<int[]> markersCircle = new ArrayList<>();
+
+    /** 사각 마커 좌표 목록: [x, y] (SGF: SQ) */
+    public List<int[]> markersSquare = new ArrayList<>();
+
+    /** 엑스 마커 좌표 목록: [x, y] (SGF: MA) */
+    public List<int[]> markersX = new ArrayList<>();
+
+    /** 레이블 마커: 키="x,y", 값=레이블 문자열 (SGF: LB) */
+    public Map<String, String> markersLabel = new LinkedHashMap<>();
+
+    /** 화살표: [x1, y1, x2, y2] (SGF: AR) */
+    public List<int[]> markersArrow = new ArrayList<>();
+
+    /** 선: [x1, y1, x2, y2] (SGF: LN) */
+    public List<int[]> markersLine = new ArrayList<>();
+
+    /** 마커 전체 초기화 */
+    public void clearMarkers() {
+        markersTriangle.clear();
+        markersCircle.clear();
+        markersSquare.clear();
+        markersX.clear();
+        markersLabel.clear();
+        markersArrow.clear();
+        markersLine.clear();
+    }
 
     /**
      * 줌 영역 (0이면 전체 보기)

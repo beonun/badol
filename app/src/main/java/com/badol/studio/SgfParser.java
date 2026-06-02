@@ -374,7 +374,7 @@ public class SgfParser {
         }
     }
 
-    /** 노드에서 메타데이터(주석, LB) 추출 */
+    /** 노드에서 메타데이터(주석, LB, 마커) 추출 */
     private static void extractMetaFromNode(SgfNode node, StringBuilder comment,
                                             Map<String, String> stoneComments) {
         String c = node.getFirst("C");
@@ -383,6 +383,48 @@ public class SgfParser {
             comment.append(c);
         }
         for (String lb : node.get("LB")) parseLB(lb, stoneComments);
+    }
+
+    /** 노드에서 마커(TR/CR/SQ/MA/LB/AR/LN) 추출하여 BdkSection에 적용 */
+    private static void applyMarkersFromNode(SgfNode node, BdkSection sec) {
+        for (String coord : node.get("TR")) {
+            int[] xy = sgfCoordToXY(coord);
+            if (xy != null) sec.markersTriangle.add(xy);
+        }
+        for (String coord : node.get("CR")) {
+            int[] xy = sgfCoordToXY(coord);
+            if (xy != null) sec.markersCircle.add(xy);
+        }
+        for (String coord : node.get("SQ")) {
+            int[] xy = sgfCoordToXY(coord);
+            if (xy != null) sec.markersSquare.add(xy);
+        }
+        for (String coord : node.get("MA")) {
+            int[] xy = sgfCoordToXY(coord);
+            if (xy != null) sec.markersX.add(xy);
+        }
+        for (String lb : node.get("LB")) {
+            int colon = lb.indexOf(':');
+            if (colon < 0) continue;
+            int[] xy = sgfCoordToXY(lb.substring(0, colon).trim());
+            if (xy != null) sec.markersLabel.put(xy[0] + "," + xy[1], lb.substring(colon + 1).trim());
+        }
+        for (String ar : node.get("AR")) {
+            int colon = ar.indexOf(':');
+            if (colon < 0) continue;
+            int[] xy1 = sgfCoordToXY(ar.substring(0, colon).trim());
+            int[] xy2 = sgfCoordToXY(ar.substring(colon + 1).trim());
+            if (xy1 != null && xy2 != null)
+                sec.markersArrow.add(new int[]{xy1[0], xy1[1], xy2[0], xy2[1]});
+        }
+        for (String ln : node.get("LN")) {
+            int colon = ln.indexOf(':');
+            if (colon < 0) continue;
+            int[] xy1 = sgfCoordToXY(ln.substring(0, colon).trim());
+            int[] xy2 = sgfCoordToXY(ln.substring(colon + 1).trim());
+            if (xy1 != null && xy2 != null)
+                sec.markersLine.add(new int[]{xy1[0], xy1[1], xy2[0], xy2[1]});
+        }
     }
 
     /** 트리에서 섹션 생성 (prefix 착수 + 트리 착수) */
@@ -398,7 +440,8 @@ public class SgfParser {
         Map<String, String> stoneComments = new LinkedHashMap<>();
         int[] vwCoords = null;
 
-        for (SgfNode node : tree.nodes) {
+        List<SgfNode> allNodes = new ArrayList<>(tree.nodes);
+        for (SgfNode node : allNodes) {
             extractMoveFromNode(node, moves);
             extractMetaFromNode(node, comment, stoneComments);
             String vw = node.getFirst("VW");
@@ -416,6 +459,8 @@ public class SgfParser {
             sec.zoomX1 = vwCoords[0]; sec.zoomY1 = vwCoords[1];
             sec.zoomX2 = vwCoords[2]; sec.zoomY2 = vwCoords[3];
         }
+        // 마커: 마지막 노드의 마커만 적용 (마지막 수순에 표시된 마커)
+        if (!allNodes.isEmpty()) applyMarkersFromNode(allNodes.get(allNodes.size() - 1), sec);
         return sec;
     }
 

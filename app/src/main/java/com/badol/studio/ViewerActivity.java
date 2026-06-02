@@ -777,6 +777,10 @@ public class ViewerActivity extends AppCompatActivity {
         } else {
             boardView.clearTriangleMark();
         }
+
+        // 현재 섹션의 마커 데이터 전달
+        boardView.setMarkers(sec);
+
         boardView.invalidate();
 
         if (advanced) playStoneSound();

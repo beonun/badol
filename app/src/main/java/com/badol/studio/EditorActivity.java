@@ -88,6 +88,25 @@ public class EditorActivity extends AppCompatActivity {
     private android.widget.SeekBar seekBar;
     private SectionAdapter sectionAdapter;
 
+    // ── 마커 도구 팔레트 ──────────────────────────────
+    private static final int TOOL_MOVE     = 0;
+    private static final int TOOL_TRIANGLE = 1;
+    private static final int TOOL_CIRCLE   = 2;
+    private static final int TOOL_SQUARE   = 3;
+    private static final int TOOL_X        = 4;
+    private static final int TOOL_LABEL    = 5;
+    private static final int TOOL_ERASE    = 6;
+    private int currentTool = TOOL_MOVE;
+
+    private android.view.View markerToolbar;
+    private Button btnToolMove;
+    private Button btnToolTriangle;
+    private Button btnToolCircle;
+    private Button btnToolSquare;
+    private Button btnToolX;
+    private Button btnToolLabel;
+    private Button btnToolEraseMarker;
+
     // ── 바둑판 상태 ───────────────────────────────────
     private int[][] boardState;   // [y][x] 0=빈, 1=흑, 2=백
     private int[][] moveNumbers;  // [y][x] 표시 번호 (rebuildState로 재계산)
@@ -201,6 +220,16 @@ public class EditorActivity extends AppCompatActivity {
         btnNext        = findViewById(R.id.btnNext);
         btnLast        = findViewById(R.id.btnLast);
         seekBar        = findViewById(R.id.seekBar);
+
+        // 마커 도구 팔레트
+        markerToolbar      = findViewById(R.id.markerToolbar);
+        btnToolMove        = findViewById(R.id.btnToolMove);
+        btnToolTriangle    = findViewById(R.id.btnToolTriangle);
+        btnToolCircle      = findViewById(R.id.btnToolCircle);
+        btnToolSquare      = findViewById(R.id.btnToolSquare);
+        btnToolX           = findViewById(R.id.btnToolX);
+        btnToolLabel       = findViewById(R.id.btnToolLabel);
+        btnToolEraseMarker = findViewById(R.id.btnToolEraseMarker);
     }
 
     private void setupBoardView() {
@@ -323,6 +352,17 @@ public class EditorActivity extends AppCompatActivity {
                 @Override public void onStopTrackingTouch(android.widget.SeekBar sb) {}
             });
         }
+
+        // 마커 도구 팔레트 버튼
+        if (btnToolMove != null) {
+            btnToolMove.setOnClickListener(v -> selectTool(TOOL_MOVE));
+            btnToolTriangle.setOnClickListener(v -> selectTool(TOOL_TRIANGLE));
+            btnToolCircle.setOnClickListener(v -> selectTool(TOOL_CIRCLE));
+            btnToolSquare.setOnClickListener(v -> selectTool(TOOL_SQUARE));
+            btnToolX.setOnClickListener(v -> selectTool(TOOL_X));
+            btnToolLabel.setOnClickListener(v -> selectTool(TOOL_LABEL));
+            btnToolEraseMarker.setOnClickListener(v -> selectTool(TOOL_ERASE));
+        }
     }
 
     private void setupSectionList() {
@@ -330,6 +370,39 @@ public class EditorActivity extends AppCompatActivity {
         lvSections.setAdapter(sectionAdapter);
         lvSections.setChoiceMode(ListView.CHOICE_MODE_NONE);
         lvSections.setOnItemClickListener((parent, view, position, id) -> switchToSection(position));
+    }
+
+    // ── 마커 도구 선택 ───────────────────────────────
+
+    private void selectTool(int tool) {
+        currentTool = tool;
+        updateMarkerToolUI();
+    }
+
+    /**
+     * 마커 도구 팔레트 버튼 강조 표시 업데이트.
+     * 선택된 도구는 primary 색, 나머지는 neutral 색으로 표시.
+     */
+    private void updateMarkerToolUI() {
+        if (btnToolMove == null) return;
+        int primary = getResources().getColor(R.color.primary, null);
+        int neutral = getResources().getColor(R.color.btn_neutral, null);
+        int del     = getResources().getColor(R.color.btn_del, null);
+
+        btnToolMove.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_MOVE ? primary : neutral));
+        btnToolTriangle.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_TRIANGLE ? primary : neutral));
+        btnToolCircle.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_CIRCLE ? primary : neutral));
+        btnToolSquare.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_SQUARE ? primary : neutral));
+        btnToolX.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_X ? primary : neutral));
+        btnToolLabel.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_LABEL ? primary : neutral));
+        btnToolEraseMarker.setBackgroundTintList(
+            android.content.res.ColorStateList.valueOf(currentTool == TOOL_ERASE ? del : neutral));
     }
 
     // ── 신규 시작 ─────────────────────────────────────
@@ -750,6 +823,12 @@ public class EditorActivity extends AppCompatActivity {
     private void onBoardTouch(int x, int y) {
         if (x < 1 || x > 19 || y < 1 || y > 19) return;
 
+        // 마커 도구 모드: 착수 입력 모드에서만 작동
+        if (!isBaseMode && currentTool != TOOL_MOVE) {
+            handleMarkerTouch(x, y);
+            return;
+        }
+
         if (isBaseMode) {
             // 배치 모드: 이미 돌이 있으면 마지막 돌이면 undo, 아니면 무시
             if (boardState[y][x] != BdkSection.EMPTY) {
@@ -817,6 +896,82 @@ public class EditorActivity extends AppCompatActivity {
         updateColorUI();
         updateBoardView();
         updateNavButtons();
+    }
+
+
+    // ── 마커 터치 처리 ──────────────────────────────────────────────
+
+    /**
+     * 착수 입력 모드에서 마커 도구가 선택된 상태에서 바둑판 터치 처리.
+     * 마커 토글 방식: 이미 있으면 제거, 없으면 추가.
+     * 레이블 도구는 입력 다이얼로그 표시.
+     */
+    private void handleMarkerTouch(int x, int y) {
+        if (currentSectionIdx < 0 || currentSectionIdx >= sections.size()) return;
+        BdkSection sec = sections.get(currentSectionIdx);
+        String key = x + "," + y;
+
+        switch (currentTool) {
+            case TOOL_TRIANGLE: {
+                boolean removed = sec.markersTriangle.removeIf(m -> m[0] == x && m[1] == y);
+                if (!removed) sec.markersTriangle.add(new int[]{x, y});
+                break;
+            }
+            case TOOL_CIRCLE: {
+                boolean removed = sec.markersCircle.removeIf(m -> m[0] == x && m[1] == y);
+                if (!removed) sec.markersCircle.add(new int[]{x, y});
+                break;
+            }
+            case TOOL_SQUARE: {
+                boolean removed = sec.markersSquare.removeIf(m -> m[0] == x && m[1] == y);
+                if (!removed) sec.markersSquare.add(new int[]{x, y});
+                break;
+            }
+            case TOOL_X: {
+                boolean removed = sec.markersX.removeIf(m -> m[0] == x && m[1] == y);
+                if (!removed) sec.markersX.add(new int[]{x, y});
+                break;
+            }
+            case TOOL_LABEL: {
+                if (sec.markersLabel.containsKey(key)) {
+                    sec.markersLabel.remove(key);
+                    boardView.setMarkers(sec);
+                } else {
+                    EditText et = new EditText(this);
+                    et.setHint("레이블 (A, B, 1, 2, ...)");
+                    et.setInputType(InputType.TYPE_CLASS_TEXT);
+                    et.setMaxLines(1);
+                    LinearLayout layout = new LinearLayout(this);
+                    layout.setPadding(48, 16, 48, 0);
+                    layout.addView(et);
+                    new AlertDialog.Builder(this)
+                        .setTitle("레이블 입력")
+                        .setView(layout)
+                        .setPositiveButton("확인", (d, w) -> {
+                            String label = et.getText().toString().trim();
+                            if (!label.isEmpty()) {
+                                sec.markersLabel.put(key, label);
+                                boardView.setMarkers(sec);
+                            }
+                        })
+                        .setNegativeButton("취소", null)
+                        .show();
+                }
+                return;
+            }
+            case TOOL_ERASE: {
+                sec.markersTriangle.removeIf(m -> m[0] == x && m[1] == y);
+                sec.markersCircle.removeIf(m -> m[0] == x && m[1] == y);
+                sec.markersSquare.removeIf(m -> m[0] == x && m[1] == y);
+                sec.markersX.removeIf(m -> m[0] == x && m[1] == y);
+                sec.markersLabel.remove(key);
+                break;
+            }
+            default:
+                return;
+        }
+
+        boardView.setMarkers(sec);
     }
 
     // ── 실행 취소 ─────────────────────────────────────
@@ -946,6 +1101,12 @@ public class EditorActivity extends AppCompatActivity {
         boardView.setBoard(boardState);
         boardView.setMoveNumbers(moveNumbers);
         boardView.setHoverColor(nextColor); // 드래그 미리보기 돌 색 동기화
+        // 현재 섹션의 마커 데이터 전달
+        if (currentSectionIdx >= 0 && currentSectionIdx < sections.size()) {
+            boardView.setMarkers(sections.get(currentSectionIdx));
+        } else {
+            boardView.clearMarkers();
+        }
         boardView.invalidate();
     }
 
@@ -953,9 +1114,16 @@ public class EditorActivity extends AppCompatActivity {
         if (isBaseMode) {
             tvModeInfo.setText(currentSectionIdx == 0 ? "기본도 입력 모드" : "입력 모드 (기본도 수정)");
             btnToggleMode.setText("착수 입력으로 전환");
+            // 배치 모드에서는 마커 팔레트 숨김
+            if (markerToolbar != null) markerToolbar.setVisibility(View.GONE);
+            // 도구를 착수 모드로 초기화
+            currentTool = TOOL_MOVE;
         } else {
             tvModeInfo.setText("착수 입력 모드");
             btnToggleMode.setText("입력 모드로 전환");
+            // 착수 입력 모드에서는 마커 팔레트 표시
+            if (markerToolbar != null) markerToolbar.setVisibility(View.VISIBLE);
+            updateMarkerToolUI();
         }
         btnToggleMode.setEnabled(true);
         btnToggleMode.setBackgroundTintList(
