@@ -109,12 +109,12 @@
             <Button
                 android:id="@+id/btnToolTriangle"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:layout_marginEnd="4dp"
                 android:text="△"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/btn_neutral"
+                android:backgroundTint="@color/btn_marker"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 style="?attr/materialButtonStyle" />
@@ -122,12 +122,12 @@
             <Button
                 android:id="@+id/btnToolCircle"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:layout_marginEnd="4dp"
                 android:text="○"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/btn_neutral"
+                android:backgroundTint="@color/btn_marker"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 style="?attr/materialButtonStyle" />
@@ -135,12 +135,12 @@
             <Button
                 android:id="@+id/btnToolSquare"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:layout_marginEnd="4dp"
                 android:text="□"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/btn_neutral"
+                android:backgroundTint="@color/btn_marker"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 style="?attr/materialButtonStyle" />
@@ -148,12 +148,12 @@
             <Button
                 android:id="@+id/btnToolX"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:layout_marginEnd="4dp"
                 android:text="✕"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/btn_neutral"
+                android:backgroundTint="@color/btn_marker"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 style="?attr/materialButtonStyle" />
@@ -161,12 +161,12 @@
             <Button
                 android:id="@+id/btnToolLabel"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:layout_marginEnd="4dp"
                 android:text="A"
                 android:textSize="@dimen/btn_text_size"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/btn_neutral"
+                android:backgroundTint="@color/btn_marker"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
                 style="?attr/materialButtonStyle" />
@@ -174,7 +174,7 @@
             <Button
                 android:id="@+id/btnToolEraseMarker"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/btn_height"
+                android:layout_height="28dp"
                 android:text="지우기"
                 android:textSize="@dimen/btn_text_size"
                 android:textColor="#FFFFFF"

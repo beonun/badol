@@ -426,7 +426,7 @@ public class EditorActivity extends AppCompatActivity {
     private void updateMarkerToolUI() {
         if (btnToolTriangle == null) return;
         int primary = getResources().getColor(R.color.primary, null);
-        int neutral = getResources().getColor(R.color.btn_neutral, null);
+        int neutral = getResources().getColor(R.color.btn_marker, null);
         int del     = getResources().getColor(R.color.btn_del, null);
 
         btnToolTriangle.setBackgroundTintList(
