@@ -89,17 +89,16 @@ public class EditorActivity extends AppCompatActivity {
     private SectionAdapter sectionAdapter;
 
     // ── 마커 도구 팔레트 ──────────────────────────────
-    private static final int TOOL_MOVE     = 0;
+    private static final int TOOL_NONE     = -1; // 선택 없음 (착수 모드)
     private static final int TOOL_TRIANGLE = 1;
     private static final int TOOL_CIRCLE   = 2;
     private static final int TOOL_SQUARE   = 3;
     private static final int TOOL_X        = 4;
     private static final int TOOL_LABEL    = 5;
     private static final int TOOL_ERASE    = 6;
-    private int currentTool = TOOL_MOVE;
+    private int currentTool = TOOL_NONE; // 기본: 마커 미선택 (착수 모드)
 
     private android.view.View markerToolbar;
-    private Button btnToolMove;
     private Button btnToolTriangle;
     private Button btnToolCircle;
     private Button btnToolSquare;
@@ -228,7 +227,6 @@ public class EditorActivity extends AppCompatActivity {
 
         // 마커 도구 팔레트
         markerToolbar      = findViewById(R.id.markerToolbar);
-        btnToolMove        = findViewById(R.id.btnToolMove);
         btnToolTriangle    = findViewById(R.id.btnToolTriangle);
         btnToolCircle      = findViewById(R.id.btnToolCircle);
         btnToolSquare      = findViewById(R.id.btnToolSquare);
@@ -361,9 +359,8 @@ public class EditorActivity extends AppCompatActivity {
             });
         }
 
-        // 마커 도구 팔레트 버튼
-        if (btnToolMove != null) {
-            btnToolMove.setOnClickListener(v -> selectTool(TOOL_MOVE));
+        // 마커 도구 팔레트 버튼 (토글 방식: 선택 중 다시 누르면 해제)
+        if (btnToolTriangle != null) {
             btnToolTriangle.setOnClickListener(v -> selectTool(TOOL_TRIANGLE));
             btnToolCircle.setOnClickListener(v -> selectTool(TOOL_CIRCLE));
             btnToolSquare.setOnClickListener(v -> selectTool(TOOL_SQUARE));
@@ -413,7 +410,12 @@ public class EditorActivity extends AppCompatActivity {
     // ── 마커 도구 선택 ───────────────────────────────
 
     private void selectTool(int tool) {
-        currentTool = tool;
+        // 이미 선택된 도구를 다시 누르면 해제 (착수 모드로 복굼)
+        if (currentTool == tool) {
+            currentTool = TOOL_NONE;
+        } else {
+            currentTool = tool;
+        }
         updateMarkerToolUI();
     }
 
@@ -422,13 +424,11 @@ public class EditorActivity extends AppCompatActivity {
      * 선택된 도구는 primary 색, 나머지는 neutral 색으로 표시.
      */
     private void updateMarkerToolUI() {
-        if (btnToolMove == null) return;
+        if (btnToolTriangle == null) return;
         int primary = getResources().getColor(R.color.primary, null);
         int neutral = getResources().getColor(R.color.btn_neutral, null);
         int del     = getResources().getColor(R.color.btn_del, null);
 
-        btnToolMove.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_MOVE ? primary : neutral));
         btnToolTriangle.setBackgroundTintList(
             android.content.res.ColorStateList.valueOf(currentTool == TOOL_TRIANGLE ? primary : neutral));
         btnToolCircle.setBackgroundTintList(
@@ -861,8 +861,8 @@ public class EditorActivity extends AppCompatActivity {
     private void onBoardTouch(int x, int y) {
         if (x < 1 || x > 19 || y < 1 || y > 19) return;
 
-        // 마커 도구 모드: 입력/착수 모드 모두 작동
-        if (currentTool != TOOL_MOVE) {
+        // 마커 도구 모드: 마커가 선택된 경우 우선 처리
+        if (currentTool != TOOL_NONE) {
             handleMarkerTouch(x, y);
             return;
         }

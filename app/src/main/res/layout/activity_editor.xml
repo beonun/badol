@@ -229,19 +229,6 @@
                     android:textColor="@color/text_hint"
                     android:layout_marginEnd="4dp" />
 
-                <!-- 착수 모드 버튼 -->
-                <Button
-                    android:id="@+id/btnToolMove"
-                    android:layout_width="wrap_content"
-                    android:layout_height="32dp"
-                    android:layout_marginEnd="3dp"
-                    android:text="착수"
-                    android:textSize="11sp"
-                    android:textColor="#FFFFFF"
-                    android:backgroundTint="@color/primary"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    style="?attr/materialButtonStyle" />
 
                 <!-- 삼각형 마커 -->
                 <Button
