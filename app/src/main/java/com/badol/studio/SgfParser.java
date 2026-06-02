@@ -228,9 +228,19 @@ public class SgfParser {
             try { base.boardSize = Integer.parseInt(sz.trim()); } catch (Exception ignored) {}
         }
 
-        // 게임 이름
+        // 게임 이름: GN 속성은 인코딩 문제가 있을 수 있으므로 PB vs PW 형식 우선 사용
         String gn = rootNode.getFirst("GN");
-        base.name = (gn != null && !gn.isEmpty()) ? gn : "기본도";
+        String pbName = rootNode.getFirst("PB");
+        String pwName = rootNode.getFirst("PW");
+        if (pbName != null && !pbName.isEmpty() && pwName != null && !pwName.isEmpty()) {
+            base.name = pbName + " vs " + pwName;
+        } else if (pbName != null && !pbName.isEmpty()) {
+            base.name = pbName;
+        } else if (gn != null && !gn.isEmpty()) {
+            base.name = gn;
+        } else {
+            base.name = "기본도";
+        }
 
         // AB/AW → initialStones
         int seq = 0;
