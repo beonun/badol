@@ -420,28 +420,40 @@ public class EditorActivity extends AppCompatActivity {
     }
 
     /**
-     * 마커 도구 팔레트 버튼 강조 표시 업데이트.
-     * 선택된 도구는 primary 색, 나머지는 neutral 색으로 표시.
+     * 마커 도구 팔레트 OutlinedButton 스타일 업데이트.
+     * 미선택: 투명 배경 + 회색 테두리 + 어두운 기호
+     * 선택: 녹색 배경 채움 + 흰 기호
+     * 지우기 미선택: 투명 + 벽돌색 테두리/텍스트
+     * 지우기 선택: 벽돌색 배경 + 흰 텍스트
      */
     private void updateMarkerToolUI() {
         if (btnToolTriangle == null) return;
-        int primary = getResources().getColor(R.color.primary, null);
-        int neutral = getResources().getColor(R.color.btn_marker, null);
-        int del     = getResources().getColor(R.color.btn_del, null);
 
-        btnToolTriangle.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_TRIANGLE ? primary : neutral));
-        btnToolCircle.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_CIRCLE ? primary : neutral));
-        btnToolSquare.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_SQUARE ? primary : neutral));
-        btnToolX.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_X ? primary : neutral));
-        btnToolLabel.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_LABEL ? primary : neutral));
-        int delLight = getResources().getColor(R.color.btn_del_light, null);
+        int transparent = android.graphics.Color.TRANSPARENT;
+        int white       = android.graphics.Color.WHITE;
+        int darkText    = android.graphics.Color.parseColor("#555555");
+        int primary     = getResources().getColor(R.color.primary, null);
+        int del         = getResources().getColor(R.color.btn_del, null);
+
+        // 마커 버튼 5개 (△○□✕A)
+        int[][] markerTools = {
+            {TOOL_TRIANGLE}, {TOOL_CIRCLE}, {TOOL_SQUARE}, {TOOL_X}, {TOOL_LABEL}
+        };
+        Button[] markerBtns = {
+            btnToolTriangle, btnToolCircle, btnToolSquare, btnToolX, btnToolLabel
+        };
+        for (int i = 0; i < markerBtns.length; i++) {
+            boolean selected = (currentTool == markerTools[i][0]);
+            markerBtns[i].setBackgroundTintList(
+                android.content.res.ColorStateList.valueOf(selected ? primary : transparent));
+            markerBtns[i].setTextColor(selected ? white : darkText);
+        }
+
+        // 지우기 버튼
+        boolean eraseSelected = (currentTool == TOOL_ERASE);
         btnToolEraseMarker.setBackgroundTintList(
-            android.content.res.ColorStateList.valueOf(currentTool == TOOL_ERASE ? del : delLight));
+            android.content.res.ColorStateList.valueOf(eraseSelected ? del : transparent));
+        btnToolEraseMarker.setTextColor(eraseSelected ? white : del);
     }
 
     // ── 신규 시작 ─────────────────────────────────────
